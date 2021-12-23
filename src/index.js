@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { CalendarApp } from './calendarApp';
+import { CalendarApp } from './CalendarApp';
 
 
 
