@@ -30,7 +30,7 @@ export const CalendarModal = () => {
         end: nowPlus1.toDate()
     });
 
-    const { notes, title } = formValues;
+    const { notes, title, start, end } = formValues;
 
     const handleInputChange = ( {  target } ) => {
             setformValues({
@@ -58,6 +58,19 @@ export const CalendarModal = () => {
         });
     }
 
+    const handlesubmitForm = (e) => {
+        e.preventDefault();
+
+        const momentStart = moment( start );
+        const momentEnd = moment( end );
+
+        if( momentStart.isSameOrAfter( momentEnd ) ){
+            console.log( 'Fecha 2 debe de ser mayor' );
+            return;
+        }
+
+    }
+
     return (
         <Modal
         className="modal"
@@ -70,7 +83,7 @@ export const CalendarModal = () => {
         >
             <h1> Nuevo evento </h1>
             <hr />
-            <form className="container">
+            <form className="container"  onSubmit={ handlesubmitForm } >
 
                 <div className="form-group">
                     <label>Fecha y hora inicio</label>
