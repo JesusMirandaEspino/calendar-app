@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const customStyles = {
     content: {
@@ -65,8 +66,8 @@ export const CalendarModal = () => {
         const momentEnd = moment( end );
 
         if( momentStart.isSameOrAfter( momentEnd ) ){
-            console.log( 'Fecha 2 debe de ser mayor' );
-            return;
+            
+            return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial');
         }
 
     }
