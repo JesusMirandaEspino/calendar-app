@@ -24,6 +24,8 @@ export const CalendarModal = () => {
 
     const [ dateStart, setdateStart ] = useState( now.toDate() );
     const [ dateEnd, setdateEnd ] = useState( nowPlus1.toDate() );
+    const [ titleValid, setTitlevalid ] = useState( true );
+
     const [ formValues, setformValues ] = useState( {
         title: 'Evento',
         notes: '',
@@ -67,9 +69,17 @@ export const CalendarModal = () => {
 
         if( momentStart.isSameOrAfter( momentEnd ) ){
             
-            return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial');
+            return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial', 'error');
         }
 
+        if( title.trim().length < 2 ){
+
+            return setTitlevalid(false);
+        }
+
+        setTitlevalid(true);
+
+        closeModal();
     }
 
     return (
@@ -110,7 +120,7 @@ export const CalendarModal = () => {
                     <label>Titulo y notas</label>
                     <input 
                         type="text" 
-                        className="form-control"
+                        className={`form-control ${ !titleValid && 'is-invalid' } `}
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
