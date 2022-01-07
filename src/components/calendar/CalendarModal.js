@@ -75,7 +75,7 @@ export const CalendarModal = () => {
         const momentEnd = moment( end );
 
         if( momentStart.isSameOrAfter( momentEnd ) ){
-            
+
             return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial', 'error');
         }
 
