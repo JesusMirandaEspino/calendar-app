@@ -8,6 +8,8 @@ import { messages } from '../../helpers/calendar-messages-es';
 import { Navbar } from '../ui/Navbar';
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
+import { useDispatch } from 'react-redux';
+import { uiOpeniModal } from '../../actions/ui';
 
     moment.locale('es');
 
@@ -29,10 +31,12 @@ import { CalendarModal } from './CalendarModal';
 
 export const CalendarScreen = () => {
 
+    const dispath = useDispatch();
+
     const [ lastView, setLastView ] = useState( localStorage.getItem('lastView')  || 'month' );
 
     const onDoubleClick = (e) => {
-        console.log(e);
+        dispath( uiOpeniModal() );
     }
 
 
@@ -58,7 +62,7 @@ export const CalendarScreen = () => {
 
     return {
         style
-    } 
+    }
 
     };
 
