@@ -80,13 +80,21 @@ export const CalendarModal = () => {
             return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial', 'error');
         }
 
-        if( title.trim().length < 2 ){
+        if( title.length < 2 ){
 
             return setTitlevalid(false);
         }
 
 
-        dispatch(  eventsAddNew( {  ...formValues, id: new Date().getTime() }) );
+
+        dispatch(  eventsAddNew({
+            ...formValues,
+            id: new Date().getTime(),
+            user: {
+                id: '12364',
+                name: 'Jesus'
+            }
+            }));
 
         setTitlevalid(true);
 
