@@ -8,7 +8,7 @@ import { messages } from '../../helpers/calendar-messages-es';
 import { Navbar } from '../ui/Navbar';
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { uiOpeniModal } from '../../actions/ui';
 import { eventsSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
@@ -34,6 +34,9 @@ import { AddNewFab } from '../ui/AddNewFab';
 export const CalendarScreen = () => {
 
     const dispath = useDispatch();
+    const { events } = useSelector( state => state.calendar );
+
+
 
     const [ lastView, setLastView ] = useState( localStorage.getItem('lastView')  || 'month' );
 
@@ -64,6 +67,8 @@ export const CalendarScreen = () => {
 
     }
 
+
+
     return {
         style
     }
@@ -76,7 +81,7 @@ export const CalendarScreen = () => {
 
             <Calendar
             localizer={localizer}
-                events={myEventsList}
+                events={ events }
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: 500 }}
