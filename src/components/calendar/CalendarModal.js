@@ -5,6 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseiModal } from '../../actions/ui';
+import { eventsAddNew } from '../../actions/events';
 
 const customStyles = {
     content: {
@@ -83,6 +84,9 @@ export const CalendarModal = () => {
 
             return setTitlevalid(false);
         }
+
+
+        dispatch(  eventsAddNew( {  ...formValues, id: new Date().getTime() }) );
 
         setTitlevalid(true);
 
