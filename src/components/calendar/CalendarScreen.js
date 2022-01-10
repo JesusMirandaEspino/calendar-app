@@ -17,19 +17,7 @@ import { AddNewFab } from '../ui/AddNewFab';
 
     const localizer = momentLocalizer(moment);
 
-    const myEventsList = [{
 
-        title: 'cumpleaños de mi esposita',
-        start: moment().toDate(),
-        end: moment().add(2, 'hours').toDate(),
-        bgcolor: '#fafafa',
-        notes: 'Comprar el pastel',
-        user: {
-            _id: '1234',
-            name: 'Jesus'
-        }
-
-    }];
 
 export const CalendarScreen = () => {
 
@@ -48,7 +36,7 @@ export const CalendarScreen = () => {
     const onSelectEvent = (e) => {
 
         dispath( eventsSetActive(e) );
-        dispath( uiOpeniModal() );
+
     }
 
     const onViewChange = (e) => {

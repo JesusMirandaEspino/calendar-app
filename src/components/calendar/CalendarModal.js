@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseiModal } from '../../actions/ui';
-import { eventsAddNew } from '../../actions/events';
+import { eventsAddNew, eventClearActiveEvent } from '../../actions/events';
 
 const customStyles = {
     content: {
@@ -23,25 +23,36 @@ Modal.setAppElement('#root');
 const now = moment().minutes(0).seconds(0).add( 1, 'hours' );
 const nowPlus1 = now.clone().add( 1, 'hours' );
 
+const initEvent = {
+        title: '',
+        notes: '',
+        start: now.toDate(),
+        end: nowPlus1.toDate()
+    }
+
 export const CalendarModal = () => {
+
+
 
 
 
     const dispatch = useDispatch();
 
     const { modalOpen } = useSelector(state => state.iu);
+    const { activeEvents } =  useSelector( state => state.calendar )
     const [ dateStart, setdateStart ] = useState( now.toDate() );
     const [ dateEnd, setdateEnd ] = useState( nowPlus1.toDate() );
     const [ titleValid, setTitlevalid ] = useState( true );
 
-    const [ formValues, setformValues ] = useState( {
-        title: 'Evento',
-        notes: '',
-        start: now.toDate(),
-        end: nowPlus1.toDate()
-    });
+    const [ formValues, setformValues ] = useState( initEvent );
 
     const { notes, title, start, end } = formValues;
+
+    useEffect(() => {
+        if( activeEvents ){
+            setformValues( activeEvents );
+        }
+    }, [activeEvents])
 
     const handleInputChange = ( {  target } ) => {
             setformValues({
@@ -51,6 +62,8 @@ export const CalendarModal = () => {
 
     const closeModal = () => {
         dispatch( uiCloseiModal() );
+        dispatch(  eventClearActiveEvent() );
+        setformValues(initEvent);
     }
 
     const HandleStartDateChange = ( e ) => {
