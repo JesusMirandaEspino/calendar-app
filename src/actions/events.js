@@ -12,5 +12,5 @@ export const eventsSetActive = (event) => ({
 });
 
 export const eventClearActiveEvent = () => ({
-    types: types.eventClearActiveEvent,
+    type: types.eventClearActiveEvent,
 });
