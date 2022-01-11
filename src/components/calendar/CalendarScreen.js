@@ -10,8 +10,9 @@ import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiOpeniModal } from '../../actions/ui';
-import { eventsSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventsSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
     moment.locale('es');
 
@@ -22,7 +23,7 @@ import { AddNewFab } from '../ui/AddNewFab';
 export const CalendarScreen = () => {
 
     const dispath = useDispatch();
-    const { events } = useSelector( state => state.calendar );
+    const { events, activeEvents } = useSelector( state => state.calendar );
 
 
 
@@ -32,6 +33,9 @@ export const CalendarScreen = () => {
         dispath( uiOpeniModal() );
     }
 
+    const onSelectSlot = (e) => {
+        dispath(  eventClearActiveEvent() );
+    }
 
     const onSelectEvent = (e) => {
 
@@ -74,6 +78,8 @@ export const CalendarScreen = () => {
                 endAccessor="end"
                 style={{ height: 500 }}
                 messages={messages}
+                onSelectSlot={ onSelectSlot }
+                selectable={true}
                 onDoubleClickEvent={ onDoubleClick }
                 onSelectEvent={ onSelectEvent }
                 onView={ onViewChange }
@@ -83,6 +89,16 @@ export const CalendarScreen = () => {
             />
 
             <AddNewFab />
+
+
+            {
+                (  activeEvents )  && <DeleteEventFab /> 
+
+            }
+
+            
+
+
             <CalendarModal />
 
         </div>
