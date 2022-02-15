@@ -1,18 +1,42 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { startLogin } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm';
 import './login.css';
 
 export const LoginScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const [ formLoginValues, handleInputChange ] = useForm( {
+
+        lEmail: 'jesusm@gmail.com',
+        lpassword: '123456'
+
+    });
+
+    const { lEmail, lpassword } = formLoginValues;
+
+const handleLogin = () => {
+e.preventDefault();
+dispatch( startLogin( lEmail, lpassword ) );
+}
+
+
     return (
         <div className="container login-container">
             <div className="row">
                 <div className="col-md-6 login-form-1">
                     <h3>Ingreso</h3>
-                    <form>
+                    <form onSubmit={ handleLogin } >
                         <div className="form-group">
                             <input 
                                 type="text"
                                 className="form-control"
                                 placeholder="Correo"
+                                name="lEmail"
+                                value="lEmail"
+                                onChange={ handleInputChange }
                             />
                         </div>
                         <div className="form-group">
@@ -20,6 +44,9 @@ export const LoginScreen = () => {
                                 type="password"
                                 className="form-control"
                                 placeholder="Contraseña"
+                                name="lpassword"
+                                value="lpassword"
+                                onChange={ handleInputChange }
                             />
                         </div>
                         <div className="form-group">
