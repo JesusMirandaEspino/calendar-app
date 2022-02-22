@@ -8,24 +8,31 @@ import {
     Route
 } from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startCheking } from '../actions/auth';
+import { PublicRoute } from './PublicRoute';
+import { PrivateRouter } from './PrivateRouter';
 
 export const AppRouter = () => {
 
 
     const dispatch = useDispatch();
+    const { cheking, uid } = useSelector( state => state.auth );
 
     useEffect(() => {
         dispatch( startCheking );
-    }, [])
+    }, [dispatch]);
+
+    if( cheking ){
+        return (<h5>Espere...</h5>)
+    }
     
 
     return (
     <BrowserRouter>
             <Routes>
-                <Route  exact path="/login"  element={ <LoginScreen />  } />
-                <Route  exact path="/"  element={ <CalendarScreen /> } />
+                <PublicRoute isAuthenticated={ !!uid } exact path="/login"  element={ <LoginScreen />  } />
+                <PrivateRouter  exact path="/"  element={ <CalendarScreen /> } sAuthenticated={ !!uid } />
             </Routes>
     </BrowserRouter>
     )
