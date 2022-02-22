@@ -46,7 +46,7 @@ export const startRegister = ( email, password, name ) => {
 }
 
 
-export const startCheking = () =>  {
+export const startCheking = (  email, password, name ) =>  {
     return async( dispatch ) => {
 
         const resp =  await fetchConToken( 'auth/renew',  { email, password, name }, 'GET' );
@@ -72,10 +72,18 @@ export const startCheking = () =>  {
 const chekingFinish = () => ({ type: types.authChekingFinish });
 
 
-
 const login = ( user ) => ({
     type: types.authLogin,
     payload: user
 
-})
+});
+
+export const startLogout = () => {
+    return ( dispatch ) => {
+        localStorage.clear();
+        dispatch( logout() );
+    }
+}
+
+const logout = () => ({ type: types.authLogout });
 
