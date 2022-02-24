@@ -24,7 +24,7 @@ export const CalendarScreen = () => {
 
     const dispath = useDispatch();
     const { events, activeEvents } = useSelector( state => state.calendar );
-
+    const { uid } = useSelector( state => state.auth);
 
 
     const [ lastView, setLastView ] = useState( localStorage.getItem('lastView')  || 'month' );
