@@ -5,7 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseiModal } from '../../actions/ui';
-import { eventsAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { eventStartAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
 
 const customStyles = {
     content: {
@@ -96,7 +96,7 @@ export const CalendarModal = () => {
             return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial', 'error');
         }
 
-        if( title.length < 2 ){
+        if( title.length > 0 || title != '' ){
 
             return setTitlevalid(false);
         }
@@ -104,14 +104,7 @@ export const CalendarModal = () => {
         if( activeEvents ){
             dispatch( eventUpdated( formValues ) );
         }else{
-            dispatch(  eventsAddNew({
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    id: '12364',
-                    name: 'Jesus'
-                }
-                }));
+            dispatch(  eventStartAddNew( formValues ));
         }
 
 
@@ -180,7 +173,7 @@ export const CalendarModal = () => {
                         value={ notes }
                         onChange={ handleInputChange }
                     ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                    <small id="help" className="form-text text-muted">Información adicional</small>
                 </div>
 
                 <button
