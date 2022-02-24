@@ -96,7 +96,7 @@ export const CalendarModal = () => {
             return Swal.fire('Error', 'La fecha final debe de ser mayor a la inicial', 'error');
         }
 
-        if( title.length > 0 || title != '' ){
+        if( title.length > 0 || title !== '' ){
 
             return setTitlevalid(false);
         }

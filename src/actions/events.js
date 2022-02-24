@@ -2,7 +2,9 @@ import { fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types"
 
 export const eventStartAddNew = ( event ) => {
-    return  async( dispatch ) => {
+    return  async( dispatch, getState ) => {
+
+        const { uid } = getState().auth;
 
         try{
 
@@ -10,6 +12,12 @@ export const eventStartAddNew = ( event ) => {
             const body = await resp.json();
 
             if( body.ok ){
+
+                event.id = body.event.id;
+                event.user = {
+                    _id: uid,
+                    name: 'Jesus'
+                }
                 dispatch( eventsAddNew() );
             }
 
