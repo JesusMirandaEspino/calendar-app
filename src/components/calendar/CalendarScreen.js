@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -10,7 +10,7 @@ import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiOpeniModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventsSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventsSetActive, eventStartLoading } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
@@ -28,6 +28,10 @@ export const CalendarScreen = () => {
 
 
     const [ lastView, setLastView ] = useState( localStorage.getItem('lastView')  || 'month' );
+
+    useEffect(() => {
+        dispath( eventStartLoading() );
+    }, [dispath])
 
     const onDoubleClick = (e) => {
         dispath( uiOpeniModal() );
