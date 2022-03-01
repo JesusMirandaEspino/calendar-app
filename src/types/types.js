@@ -4,6 +4,8 @@ export const types = {
 
     startAddNew: '[event] Set Active',
 
+    EventLogout: '[event] Event Logout',
+
     eventSetActive: '[event] Start Add New',
     eventLoaded: '[event] Event Loaded',
     eventAddNew: '[event] Add New',
