@@ -58,7 +58,6 @@ export const startEventUpdate = ( event ) => {
 
         }catch(error){
             console.log(error);
-            Swal.fire( 'Error', body.msg, 'error' );
         }
     } 
 }
@@ -82,7 +81,6 @@ export const eventStartDelete = ( ) => {
 
         }catch(error){
             console.log(error);
-            Swal.fire( 'Error', body.msg, 'error' );
         }
     }
 }
