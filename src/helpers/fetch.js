@@ -5,18 +5,21 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
 
     const url = `${ baseUrl }/${ endpoint }`;
 
+    console.log( JSON.stringify( data ) );
+
     if( method === 'GET' ){
         return fetch( url );
     }else{
         return fetch( url, {
-            method, 
+            method,
             headers: {
-                ' Content-type' : 'aplication/json',
+                'Content-type': 'application/json'
             },
             body: JSON.stringify( data )
+
         });
     }
-}
+};
 
 
 const fetchConToken = ( endpoint, data, method = 'GET' ) => {
@@ -33,16 +36,16 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
         });
     }else{
         return fetch( url, {
-            method, 
+            method,
             headers: {
-                'Content-type' : 'aplication/json',
+                'Content-type': 'application/json',
                 'x-token': token
             },
             body: JSON.stringify( data )
         });
     }
 
-}
+};
 
 
 export {
